@@ -2,3 +2,4 @@ celeritas/
 tmp/
 vendor/
 .env
+.DS_Store

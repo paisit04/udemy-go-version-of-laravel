@@ -1,9 +1,14 @@
 package main
 
-import "github.com/paisit04/celeritas"
+import (
+	"myapp/handlers"
+
+	"github.com/paisit04/celeritas"
+)
 
 type application struct {
-	App *celeritas.Celeritas
+	App     *celeritas.Celeritas
+	Handler *handlers.Handlers
 }
 
 func main() {

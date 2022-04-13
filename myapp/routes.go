@@ -11,6 +11,9 @@ func (a *application) routes() *chi.Mux {
 
 	// add routes here
 	a.App.Routes.Get("/", a.Handler.Home)
+	a.App.Routes.Get("/go-page", a.Handler.GoPage)
+	a.App.Routes.Get("/jet-page", a.Handler.JetPage)
+	a.App.Routes.Get("/sessions", a.Handler.SessionTest)
 
 	// static routes
 	fileServer := http.FileServer(http.Dir("./public"))

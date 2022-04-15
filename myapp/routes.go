@@ -25,6 +25,12 @@ func (a *application) routes() *chi.Mux {
 	a.App.Routes.Get("/form", a.Handler.Form)
 	a.App.Routes.Post("/form", a.Handler.PostForm)
 
+	a.get("/json", a.Handler.JSON)
+	a.get("/xml", a.Handler.XML)
+	a.get("/download-file", a.Handler.DownloadFile)
+
+	a.get("/crypto", a.Handler.TestCrypto)
+
 	a.App.Routes.Get("/create-user", func(w http.ResponseWriter, r *http.Request) {
 		u := data.User{
 			FirstName: "Trevor",

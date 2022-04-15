@@ -31,6 +31,12 @@ func (a *application) routes() *chi.Mux {
 
 	a.get("/crypto", a.Handler.TestCrypto)
 
+	a.get("/cache-test", a.Handler.ShowCachePage)
+	a.post("/api/save-in-cache", a.Handler.SaveInCache)
+	a.post("/api/get-from-cache", a.Handler.GetFromCache)
+	a.post("/api/delete-from-cache", a.Handler.DeleteFromCache)
+	a.post("/api/empty-cache", a.Handler.EmptyCache)
+
 	a.App.Routes.Get("/create-user", func(w http.ResponseWriter, r *http.Request) {
 		u := data.User{
 			FirstName: "Trevor",

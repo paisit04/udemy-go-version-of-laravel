@@ -7,6 +7,7 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/paisit04/celeritas/mailer"
 )
 
 func (a *application) routes() *chi.Mux {
@@ -36,6 +37,38 @@ func (a *application) routes() *chi.Mux {
 	a.post("/api/get-from-cache", a.Handler.GetFromCache)
 	a.post("/api/delete-from-cache", a.Handler.DeleteFromCache)
 	a.post("/api/empty-cache", a.Handler.EmptyCache)
+
+	a.get("/test-mail", func(w http.ResponseWriter, r *http.Request) {
+		// msg := mailer.Message{
+		// 	From:        "test@example.com",
+		// 	To:          "you@there.com",
+		// 	Subject:     "Test Subject - send using channel",
+		// 	Template:    "test",
+		// 	Attachments: nil,
+		// 	Data:        nil,
+		// }
+		msg := mailer.Message{
+			From:        "info@mg.enres.co",
+			To:          "paisit.j@gmail.com",
+			Subject:     "Test Subject - send using an API",
+			Template:    "test",
+			Attachments: nil,
+			Data:        nil,
+		}
+
+		a.App.Mail.Jobs <- msg
+		res := <-a.App.Mail.Results
+		if res.Error != nil {
+			a.App.ErrorLog.Println(res.Error)
+		}
+
+		// err := a.App.Mail.SendSMTPMessage(msg)
+		// if err != nil {
+		// 	a.App.ErrorLog.Println(err)
+		// 	return
+		// }
+		fmt.Fprint(w, "Send mail!")
+	})
 
 	a.App.Routes.Get("/create-user", func(w http.ResponseWriter, r *http.Request) {
 		u := data.User{

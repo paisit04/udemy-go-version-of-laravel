@@ -9,7 +9,15 @@ Login
 
 {{ block pageContent() }}
 <h2 class="mt-5 text-center">Login</h2>
+
 <hr>
+
+{{if .Flash != ""}}
+<div class="alert alert-info text-center">
+    {{.Flash}}
+</div>
+{{end}}
+
 <form method="post" action="/users/login"
   name="login-form" id="login-form"
   class="d-block needs-validation"
@@ -27,6 +35,11 @@ Login
     <label for="password" class="form-label">Password</label>
     <input type="password" class="form-control" id="password" name="password"
       required="" autocomplete="password-new">
+  </div>
+
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" value="remember" name="remember" id="remember">
+    <label class="form-check-label" for="remember">Remember me</label>
   </div>
 
   <hr>
